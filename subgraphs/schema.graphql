@@ -1,0 +1,13 @@
+type LimitBuyOrder @entity {
+  id: ID!
+  ownerAddress: Bytes!
+  price: BigInt!
+  size: BigInt!
+}
+
+type LimitSellOrder @entity {
+  id: ID!
+  ownerAddress: Bytes!
+  price: BigInt!
+  size: BigInt!
+}

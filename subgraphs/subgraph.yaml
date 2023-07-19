@@ -1,0 +1,33 @@
+specVersion: 0.0.5
+description: OrderBook Subgraph
+repository: https://github.com/rohanshrothrium/kuru-orderbook
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: OrderBook
+    network: testnet
+    source:
+      address: '0x5d3870232674F7e92BAFAaF8FaE1f1e87C61186F'
+      abi: OrderBook
+      startBlock: 15966884
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - LimitBuyOrder
+        - LimitSellOrder
+      abis:
+        - name: OrderBook
+          file: ./abi/OrderBook.json
+      eventHandlers:
+        - event: LimitBuyCreated(indexed address,uint96,uint256,uint256)
+          handler: handleNewBuyLimitOrder
+        - event: LimitSellCreated(indexed address,uint96,uint256,uint256)
+          handler: handleNewSellLimitOrder
+        - event: LimitBuyCompleted(indexed address,uint256,uint256)
+          handler: handleBuyCompletion
+        - event: LimitSellCompleted(indexed address,uint256,uint256)
+          handler: handleSellCompletion
+      file: ./src/mapping.ts
