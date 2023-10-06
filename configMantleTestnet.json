@@ -1,8 +1,0 @@
-{
-    "usdcAddress": "0xbAF72402f98f16e77638Ce5FCC5689CD1627E8ff",
-    "wethAddress": "0xdEAddEaDdeadDEadDEADDEAddEADDEAddead1111",
-    "oracleAddress": "0xA2aa501b19aff244D90cc15a4Cf739D2725B5729",
-    "marginAccountAddress": "0xfeee4211eD35f73e17Db734E724e4D64f1FC50Da",
-    "positionManagerAddress": "0xA4DB58de68f4C68595d0B36E9b82d54EbD5fD008",
-    "orderBookAddress": "0x5d3870232674F7e92BAFAaF8FaE1f1e87C61186F"
-}

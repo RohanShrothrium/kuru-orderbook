@@ -1,0 +1,178 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "AbstractOrderBook",
+  "sourceName": "contracts/AbstractOrderBook.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "uint96",
+          "name": "_price",
+          "type": "uint96"
+        },
+        {
+          "internalType": "uint256",
+          "name": "size",
+          "type": "uint256"
+        }
+      ],
+      "name": "addBuyOrder",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint96",
+          "name": "_price",
+          "type": "uint96"
+        },
+        {
+          "internalType": "uint256",
+          "name": "size",
+          "type": "uint256"
+        }
+      ],
+      "name": "addSellOrder",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_orderId",
+          "type": "uint256"
+        }
+      ],
+      "name": "cancelBuyOrder",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_orderId",
+          "type": "uint256"
+        }
+      ],
+      "name": "cancelSellOrder",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "s_buyPricePoints",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "totalCompletedOrCanceledOrders",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalOrdersAtPrice",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "executableSize",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "s_orderIdCounter",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "s_orders",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "ownerAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "uint96",
+          "name": "price",
+          "type": "uint96"
+        },
+        {
+          "internalType": "uint256",
+          "name": "size",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "acceptableRange",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "s_sellPricePoints",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "totalCompletedOrCanceledOrders",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalOrdersAtPrice",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "executableSize",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

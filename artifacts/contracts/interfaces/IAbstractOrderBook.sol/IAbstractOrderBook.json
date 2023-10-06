@@ -1,17 +1,53 @@
 {
   "_format": "hh-sol-artifact-1",
-  "contractName": "IOrderBook",
-  "sourceName": "contracts/interfaces/IOrderBook.sol",
+  "contractName": "IAbstractOrderBook",
+  "sourceName": "contracts/interfaces/IAbstractOrderBook.sol",
   "abi": [
     {
       "inputs": [
         {
+          "internalType": "uint96",
+          "name": "_price",
+          "type": "uint96"
+        },
+        {
+          "internalType": "uint256",
+          "name": "size",
+          "type": "uint256"
+        }
+      ],
+      "name": "addBuyOrder",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint96",
+          "name": "_price",
+          "type": "uint96"
+        },
+        {
+          "internalType": "uint256",
+          "name": "size",
+          "type": "uint256"
+        }
+      ],
+      "name": "addSellOrder",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
           "internalType": "uint256",
           "name": "_orderId",
           "type": "uint256"
         }
       ],
-      "name": "claimBuyLimitOrder",
+      "name": "cancelBuyOrder",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -24,43 +60,7 @@
           "type": "uint256"
         }
       ],
-      "name": "claimSellLimitOrder",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint96[]",
-          "name": "c_prices",
-          "type": "uint96[]"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_size",
-          "type": "uint256"
-        }
-      ],
-      "name": "placeAndExecuteMarketBuy",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint96[]",
-          "name": "c_prices",
-          "type": "uint96[]"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_size",
-          "type": "uint256"
-        }
-      ],
-      "name": "placeAndExecuteMarketSell",
+      "name": "cancelSellOrder",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"

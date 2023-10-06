@@ -1,34 +1,8 @@
 {
   "_format": "hh-sol-artifact-1",
-  "contractName": "IOrderBook",
-  "sourceName": "contracts/interfaces/IOrderBook.sol",
+  "contractName": "ICranklessOrderBook",
+  "sourceName": "contracts/interfaces/ICranklessOrderBook.sol",
   "abi": [
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_orderId",
-          "type": "uint256"
-        }
-      ],
-      "name": "claimBuyLimitOrder",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_orderId",
-          "type": "uint256"
-        }
-      ],
-      "name": "claimSellLimitOrder",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
     {
       "inputs": [
         {

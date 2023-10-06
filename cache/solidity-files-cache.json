@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/rohanshrothrium/Documents/orderbook/contracts/OrderBook.sol": {
-      "lastModificationDate": 1689726209871,
-      "contentHash": "28fc0e044afb5df4dec434dea3816bf6",
+      "lastModificationDate": 1696597865287,
+      "contentHash": "25753b17cfbcaaa6e264f9e83c5dd889",
       "sourceName": "contracts/OrderBook.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -30,9 +30,8 @@
       },
       "imports": [
         "@openzeppelin/contracts/utils/math/SafeMath.sol",
-        "./interfaces/IPositionManager.sol",
-        "./interfaces/IMarginAccount.sol",
-        "./interfaces/IOrderBook.sol"
+        "./interfaces/IOrderBook.sol",
+        "./AbstractOrderBook.sol"
       ],
       "versionPragmas": [
         "^0.8.0"
@@ -42,8 +41,8 @@
       ]
     },
     "/Users/rohanshrothrium/Documents/orderbook/contracts/PositionManager.sol": {
-      "lastModificationDate": 1689726996389,
-      "contentHash": "c266180e21e5f922982e262251d6f029",
+      "lastModificationDate": 1693509368587,
+      "contentHash": "7a1424f8ac624343030f19c1beb18701",
       "sourceName": "contracts/PositionManager.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -226,8 +225,8 @@
       ]
     },
     "/Users/rohanshrothrium/Documents/orderbook/contracts/interfaces/IOrderBook.sol": {
-      "lastModificationDate": 1689676342120,
-      "contentHash": "1cc06f8ca0e803fd0cc88a4d23f89f0a",
+      "lastModificationDate": 1696597876079,
+      "contentHash": "5bd46cc246c3542bf8be2e718d0ef165",
       "sourceName": "contracts/interfaces/IOrderBook.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -471,6 +470,154 @@
       ],
       "artifacts": [
         "IPythEvents"
+      ]
+    },
+    "/Users/rohanshrothrium/Documents/orderbook/contracts/AbstractOrderBook.sol": {
+      "lastModificationDate": 1696584426741,
+      "contentHash": "0b01397cea262e4af8574ba054af0f95",
+      "sourceName": "contracts/AbstractOrderBook.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/utils/math/SafeMath.sol",
+        "./libraries/IERC20.sol",
+        "./interfaces/IAbstractOrderBook.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "AbstractOrderBook"
+      ]
+    },
+    "/Users/rohanshrothrium/Documents/orderbook/contracts/interfaces/IAbstractOrderBook.sol": {
+      "lastModificationDate": 1696585624473,
+      "contentHash": "493f661d531b327165d8ea1cf488dd42",
+      "sourceName": "contracts/interfaces/IAbstractOrderBook.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IAbstractOrderBook"
+      ]
+    },
+    "/Users/rohanshrothrium/Documents/orderbook/contracts/CranklessOrderBook.sol": {
+      "lastModificationDate": 1696623241195,
+      "contentHash": "d758123ccc459b247c30c48045970a3f",
+      "sourceName": "contracts/CranklessOrderBook.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/utils/math/SafeMath.sol",
+        "./interfaces/ICranklessOrderBook.sol",
+        "./AbstractOrderBook.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "CranklessOrderBook"
+      ]
+    },
+    "/Users/rohanshrothrium/Documents/orderbook/contracts/interfaces/ICranklessOrderBook.sol": {
+      "lastModificationDate": 1696597887169,
+      "contentHash": "2fc1ed39b22a926edd2afaae32d1b8ce",
+      "sourceName": "contracts/interfaces/ICranklessOrderBook.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ICranklessOrderBook"
       ]
     }
   }
