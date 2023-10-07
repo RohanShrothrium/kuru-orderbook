@@ -196,7 +196,10 @@ async function main() {
         placeLimitExistingGas,
         placeMarketSingleGas,
         placeMarketTwoGas,
-        placeMarketThreeGas
+        placeMarketThreeGas,
+        placeMarketSingle1PPGas,
+        placeMarketTwo1PPGas,
+        placeMarketThree1PPGas
     }));
 }
 
