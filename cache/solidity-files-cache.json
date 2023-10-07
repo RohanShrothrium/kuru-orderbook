@@ -40,85 +40,6 @@
         "OrderBook"
       ]
     },
-    "/Users/rohanshrothrium/Documents/orderbook/contracts/PositionManager.sol": {
-      "lastModificationDate": 1693509368587,
-      "contentHash": "7a1424f8ac624343030f19c1beb18701",
-      "sourceName": "contracts/PositionManager.sol",
-      "solcConfig": {
-        "version": "0.8.17",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/utils/math/SafeMath.sol",
-        "@pythnetwork/pyth-sdk-solidity/IPyth.sol",
-        "@pythnetwork/pyth-sdk-solidity/PythStructs.sol",
-        "./interfaces/IOrderBook.sol",
-        "./interfaces/IMarginAccount.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "PositionManager"
-      ]
-    },
-    "/Users/rohanshrothrium/Documents/orderbook/contracts/MarginAccount.sol": {
-      "lastModificationDate": 1689721726410,
-      "contentHash": "8c29c41cdfed384f6386bc2324a30011",
-      "sourceName": "contracts/MarginAccount.sol",
-      "solcConfig": {
-        "version": "0.8.17",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./libraries/IERC20.sol",
-        "./interfaces/IMarginAccount.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "MarginAccount"
-      ]
-    },
     "/Users/rohanshrothrium/Documents/orderbook/contracts/libraries/IERC20.sol": {
       "lastModificationDate": 1687980428657,
       "contentHash": "24aa1bdf7c9bfaf78f55f0531749972f",
@@ -152,41 +73,6 @@
       ],
       "artifacts": [
         "IERC20"
-      ]
-    },
-    "/Users/rohanshrothrium/Documents/orderbook/contracts/interfaces/IMarginAccount.sol": {
-      "lastModificationDate": 1689369084398,
-      "contentHash": "8aca1dfcb1e6a77a0cce2b9dc2ff9dac",
-      "sourceName": "contracts/interfaces/IMarginAccount.sol",
-      "solcConfig": {
-        "version": "0.8.17",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IMarginAccount"
       ]
     },
     "/Users/rohanshrothrium/Documents/orderbook/node_modules/@openzeppelin/contracts/utils/math/SafeMath.sol": {
@@ -292,41 +178,6 @@
       ],
       "artifacts": [
         "AggregatorV3Interface"
-      ]
-    },
-    "/Users/rohanshrothrium/Documents/orderbook/contracts/interfaces/IPositionManager.sol": {
-      "lastModificationDate": 1689193646843,
-      "contentHash": "4c36575892ebae93b2950ee030e9e57f",
-      "sourceName": "contracts/interfaces/IPositionManager.sol",
-      "solcConfig": {
-        "version": "0.8.17",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IPositionManager"
       ]
     },
     "/Users/rohanshrothrium/Documents/orderbook/node_modules/hardhat/console.sol": {
@@ -547,8 +398,8 @@
       ]
     },
     "/Users/rohanshrothrium/Documents/orderbook/contracts/CranklessOrderBook.sol": {
-      "lastModificationDate": 1696623241195,
-      "contentHash": "d758123ccc459b247c30c48045970a3f",
+      "lastModificationDate": 1696687108270,
+      "contentHash": "6c693053811247d312e0265c94a2dc13",
       "sourceName": "contracts/CranklessOrderBook.sol",
       "solcConfig": {
         "version": "0.8.17",

@@ -124,6 +124,71 @@ async function main() {
         placeMarketThreeGas[i] = receipt.cumulativeGasUsed.toString();
     }
 
+    // place 20 new limits at same price
+    console.log("=============================================")
+    console.log("               EXISTING LIMIT                ")
+    console.log("=============================================")
+    for (let i = 0; i < 60; i++) {
+        var tx = await orderBook.addBuyOrder(
+            190000,
+            10**8,
+        );
+        const receipt = await tx.wait();
+
+        console.log("Gas used: " + receipt.cumulativeGasUsed);
+    }
+
+    // place 10 market orders that iterates over a single price point.
+    // orderIds: 11, 12, 13, ..., 90
+    console.log("=============================================")
+    console.log("              1 LO 1 PP MARKET               ")
+    console.log("=============================================")
+    const placeMarketSingle1PPGas = {};
+    for (let i = 0; i < 10; i++) {
+        var tx = await orderBook.placeAndExecuteMarketSell(
+            [111 + i],
+            10**8,
+        );
+        const receipt = await tx.wait();
+
+        console.log("Gas used: " + receipt.cumulativeGasUsed);
+        placeMarketSingle1PPGas[i] = receipt.cumulativeGasUsed.toString();
+    }
+
+    // place 10 market orders that iterates over two price points.
+    // orderIds: 11, 12, 13, ..., 70
+    console.log("=============================================")
+    console.log("               2 LO 1 PP MARKET              ")
+    console.log("=============================================")
+    const placeMarketTwo1PPGas = {};
+    for (let i = 0; i < 20; i = i + 2) {
+        var tx = await orderBook.placeAndExecuteMarketSell(
+            [121 + i, 121 + (i+1)],
+            2*10**8,
+        );
+        const receipt = await tx.wait();
+
+        console.log("Gas used: " + receipt.cumulativeGasUsed);
+        placeMarketTwo1PPGas[i] = receipt.cumulativeGasUsed.toString();
+    }
+
+    // place 10 market orders that iterates over three price points.
+    // orderIds: 11, 12, 13, ..., 40
+    console.log("=============================================")
+    console.log("              3 LO 1 PP MARKET               ")
+    console.log("=============================================")
+    const placeMarketThree1PPGas = {};
+    for (let i = 0; i < 30; i = i + 3) {
+        var tx = await orderBook.placeAndExecuteMarketSell(
+            [141 + i, 141 + (i+1), 141 + (i+2)],
+            3*10**8,
+        );
+        const receipt = await tx.wait();
+
+        console.log("Gas used: " + receipt.cumulativeGasUsed);
+        placeMarketThree1PPGas[i] = receipt.cumulativeGasUsed.toString();
+    }
+
 
     fs.writeFileSync("cranklessOrderBook.json", JSON.stringify({
         placeLimitGas,

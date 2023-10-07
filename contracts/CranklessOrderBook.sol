@@ -134,8 +134,8 @@ contract CranklessOrderBook is AbstractOrderBook, ICranklessOrderBook {
             _orderIndex += 1;
             _order = s_orders[c_order_ids[_orderIndex]];
             if (_existinPrice != _order.price) {
-                s_buyPricePoints[_existinPrice] = m_pricePoint;
-                m_pricePoint = s_buyPricePoints[_order.price];
+                s_sellPricePoints[_existinPrice] = m_pricePoint;
+                m_pricePoint = s_sellPricePoints[_order.price];
             }
         }
         
@@ -152,7 +152,7 @@ contract CranklessOrderBook is AbstractOrderBook, ICranklessOrderBook {
 
             _order.size -= _size;
             s_orders[c_order_ids[_orderIndex]] = _order;
-            s_buyPricePoints[_order.price] = m_pricePoint;
+            s_sellPricePoints[_order.price] = m_pricePoint;
         }
 
         tokenB.transfer(
