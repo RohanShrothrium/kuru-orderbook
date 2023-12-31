@@ -37,9 +37,9 @@
           "type": "uint96[]"
         },
         {
-          "internalType": "uint256",
+          "internalType": "uint128",
           "name": "_size",
-          "type": "uint256"
+          "type": "uint128"
         }
       ],
       "name": "placeAndExecuteMarketBuy",
@@ -55,9 +55,9 @@
           "type": "uint96[]"
         },
         {
-          "internalType": "uint256",
+          "internalType": "uint128",
           "name": "_size",
-          "type": "uint256"
+          "type": "uint128"
         }
       ],
       "name": "placeAndExecuteMarketSell",

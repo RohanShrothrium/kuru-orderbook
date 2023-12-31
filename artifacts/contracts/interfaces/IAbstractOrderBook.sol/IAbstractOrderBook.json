@@ -11,9 +11,9 @@
           "type": "uint96"
         },
         {
-          "internalType": "uint256",
+          "internalType": "uint128",
           "name": "size",
-          "type": "uint256"
+          "type": "uint128"
         }
       ],
       "name": "addBuyOrder",
@@ -29,9 +29,9 @@
           "type": "uint96"
         },
         {
-          "internalType": "uint256",
+          "internalType": "uint128",
           "name": "size",
-          "type": "uint256"
+          "type": "uint128"
         }
       ],
       "name": "addSellOrder",

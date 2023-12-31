@@ -11,13 +11,24 @@
           "type": "uint96[]"
         },
         {
-          "internalType": "uint256",
+          "internalType": "uint128",
           "name": "_size",
-          "type": "uint256"
+          "type": "uint128"
+        },
+        {
+          "internalType": "bool",
+          "name": "_isFillOrKill",
+          "type": "bool"
         }
       ],
       "name": "placeAndExecuteMarketBuy",
-      "outputs": [],
+      "outputs": [
+        {
+          "internalType": "uint128",
+          "name": "",
+          "type": "uint128"
+        }
+      ],
       "stateMutability": "nonpayable",
       "type": "function"
     },
@@ -29,13 +40,24 @@
           "type": "uint96[]"
         },
         {
-          "internalType": "uint256",
+          "internalType": "uint128",
           "name": "_size",
-          "type": "uint256"
+          "type": "uint128"
+        },
+        {
+          "internalType": "bool",
+          "name": "_isFillOrKill",
+          "type": "bool"
         }
       ],
       "name": "placeAndExecuteMarketSell",
-      "outputs": [],
+      "outputs": [
+        {
+          "internalType": "uint128",
+          "name": "",
+          "type": "uint128"
+        }
+      ],
       "stateMutability": "nonpayable",
       "type": "function"
     }

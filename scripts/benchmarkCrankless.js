@@ -83,6 +83,7 @@ async function main() {
         var tx = await orderBook.placeAndExecuteMarketSell(
             [100 - i],
             10**8,
+            false
         );
         const receipt = await tx.wait();
 
@@ -100,6 +101,7 @@ async function main() {
         var tx = await orderBook.placeAndExecuteMarketSell(
             [90 - i, 90 - (i+1)],
             2*10**8,
+            false
         );
         const receipt = await tx.wait();
 
@@ -117,6 +119,7 @@ async function main() {
         var tx = await orderBook.placeAndExecuteMarketSell(
             [70 - i, 70 - (i+1), 70 - (i+2)],
             3*10**8,
+            false
         );
         const receipt = await tx.wait();
 
@@ -148,6 +151,7 @@ async function main() {
         var tx = await orderBook.placeAndExecuteMarketSell(
             [111 + i],
             10**8,
+            false
         );
         const receipt = await tx.wait();
 
@@ -165,6 +169,7 @@ async function main() {
         var tx = await orderBook.placeAndExecuteMarketSell(
             [121 + i, 121 + (i+1)],
             2*10**8,
+            false
         );
         const receipt = await tx.wait();
 
@@ -182,6 +187,7 @@ async function main() {
         var tx = await orderBook.placeAndExecuteMarketSell(
             [141 + i, 141 + (i+1), 141 + (i+2)],
             3*10**8,
+            false
         );
         const receipt = await tx.wait();
 

@@ -10,7 +10,6 @@ import {AbstractOrderBook} from "./AbstractOrderBook.sol";
 // size is 10**10
 // price is 10**2
 contract CranklessOrderBook is AbstractOrderBook, ICranklessOrderBook {
-    using SafeMath for uint256;
 
     constructor(
         address _tokenAAddress,
@@ -32,17 +31,19 @@ contract CranklessOrderBook is AbstractOrderBook, ICranklessOrderBook {
      */
     function placeAndExecuteMarketBuy(
         uint96[] calldata c_order_ids,
-        uint256 _size
-    ) external override {
+        uint128 _size,
+        bool _isFillOrKill
+    ) external override returns (uint128) {
         uint256 _orderIndex = 0;
         Order memory _order = s_orders[c_order_ids[_orderIndex]];
         PricePoint memory m_pricePoint = s_buyPricePoints[_order.price];
 
         uint256 _executedSize = 0;
 
-        require(_order.acceptableRange <= m_pricePoint.totalCompletedOrCanceledOrders, "OrderBook: order not executable");
-
         while (_size > _order.size && _orderIndex < c_order_ids.length) {
+            require(!_order.isBuy, "OrderBook: executing against a buy order");
+            require(_order.acceptableRange <= m_pricePoint.totalCompletedOrCanceledOrders, "OrderBook: order not executable");
+
             _executedSize += _order.size;
             _size -= _order.size;
             m_pricePoint.totalCompletedOrCanceledOrders += _order.size;
@@ -68,6 +69,9 @@ contract CranklessOrderBook is AbstractOrderBook, ICranklessOrderBook {
         }
         
         if (_size > 0 && _orderIndex < c_order_ids.length) {
+            require(!_order.isBuy, "OrderBook: executing against a buy order");
+            require(_order.acceptableRange <= m_pricePoint.totalCompletedOrCanceledOrders, "OrderBook: order not executable");
+
             m_pricePoint.totalCompletedOrCanceledOrders += _size;
             _executedSize += _size;
 
@@ -83,10 +87,16 @@ contract CranklessOrderBook is AbstractOrderBook, ICranklessOrderBook {
             s_buyPricePoints[_order.price] = m_pricePoint;
         }
 
+        if (_isFillOrKill) {
+            require(_size == 0, "insufficient volume on book");
+        }
+
         tokenA.transfer(
             msg.sender,
-            _executedSize.mul(10 ** tokenADecimals).div(sizePrecision)
+            ((_executedSize * 10 ** tokenADecimals) / sizePrecision)
         );
+
+        return _size;
     }
 
     /**
@@ -95,7 +105,7 @@ contract CranklessOrderBook is AbstractOrderBook, ICranklessOrderBook {
      * @param _price conversion price from A to B
      */
     function _amountPayable(uint256 _size, uint256 _price) internal view returns (uint256) {
-        return _size.mul(_price).mul(10 ** tokenBDecimals).div(pricePrecision).div(sizePrecision);
+        return ((((_size * _price) * 10 ** tokenBDecimals) / pricePrecision) / sizePrecision);
     }
 
     /**
@@ -104,18 +114,20 @@ contract CranklessOrderBook is AbstractOrderBook, ICranklessOrderBook {
      */
     function placeAndExecuteMarketSell(
         uint96[] calldata c_order_ids,
-        uint256 _size
-    ) external {
+        uint128 _size,
+        bool _isFillOrKill
+    ) external returns (uint128) {
         uint256 _orderIndex = 0;
         Order memory _order = s_orders[c_order_ids[_orderIndex]];
         PricePoint memory m_pricePoint = s_sellPricePoints[_order.price];
 
         uint256 _priceToGet = 0;
 
-        require(_order.acceptableRange <= m_pricePoint.totalCompletedOrCanceledOrders, "OrderBook: order not executable");
-
         while (_size > _order.size && _orderIndex < c_order_ids.length) {
-            _priceToGet += _order.size.mul(_order.price);
+            require(_order.isBuy, "OrderBook: executing against a sell order");
+            require(_order.acceptableRange <= m_pricePoint.totalCompletedOrCanceledOrders, "OrderBook: order not executable");
+
+            _priceToGet += _order.size * _order.price;
             _size -= _order.size;
             m_pricePoint.totalCompletedOrCanceledOrders += _order.size;
 
@@ -125,7 +137,7 @@ contract CranklessOrderBook is AbstractOrderBook, ICranklessOrderBook {
             tokenA.transferFrom(
                 msg.sender,
                 _order.ownerAddress,
-                _order.size.mul(10 ** tokenADecimals).div(sizePrecision)
+                (_order.size * 10 ** tokenADecimals) / sizePrecision
             );
 
             _order.size = 0;
@@ -140,14 +152,17 @@ contract CranklessOrderBook is AbstractOrderBook, ICranklessOrderBook {
         }
         
         if (_size > 0 && _orderIndex < c_order_ids.length) {
+            require(_order.isBuy, "OrderBook: executing against a sell order");
+            require(_order.acceptableRange <= m_pricePoint.totalCompletedOrCanceledOrders, "OrderBook: order not executable");
+
             m_pricePoint.totalCompletedOrCanceledOrders += _size;
-            _priceToGet += _size.mul(_order.price);
+            _priceToGet += _size * _order.price;
 
             // TODO: Transfer tokens to limit order.
             tokenA.transferFrom(
                 msg.sender,
                 _order.ownerAddress,
-                _size.mul(10 ** tokenADecimals).div(sizePrecision)
+                ((_size * 10 ** tokenADecimals) / sizePrecision)
             );
 
             _order.size -= _size;
@@ -155,9 +170,55 @@ contract CranklessOrderBook is AbstractOrderBook, ICranklessOrderBook {
             s_sellPricePoints[_order.price] = m_pricePoint;
         }
 
+        if (_isFillOrKill) {
+            require(_size == 0, "insufficient volume on book");
+        }
+
         tokenB.transfer(
             msg.sender,
-            _priceToGet.mul(10 ** tokenBDecimals).div(pricePrecision).div(sizePrecision)
+            (((_priceToGet * 10 ** tokenBDecimals) / pricePrecision) / sizePrecision)
         );
+
+        return _size;
+    }
+
+     /**
+     * Places and executes an aggressive limit sell order
+     * @param c_order_ids order ids for execution of aggressive order
+     * @param _size Size of the aggressive sell order
+     * @param _price conversion price from A to B
+     */
+    function placeAggressivelimitSell(
+        uint96[] calldata c_order_ids,
+        uint128 _size,
+        uint96 _price
+    ) external {
+        uint128 _remainingSize = this.placeAndExecuteMarketSell(
+            c_order_ids,
+            _size,
+            false
+        );
+
+        this.addSellOrder(_price, _remainingSize);
+    }
+
+    /**
+     * Places and executes an aggressive limit buy order
+     * @param c_order_ids order ids for execution of aggressive order
+     * @param _size Size of the aggressive buy order
+     * @param _price conversion price from A to B
+     */
+    function placeAggressivelimitBuy(
+        uint96[] calldata c_order_ids,
+        uint128 _size,
+        uint96 _price
+    ) external {
+        uint128 _remainingSize = this.placeAndExecuteMarketBuy(
+            c_order_ids,
+            _size,
+            false
+        );
+
+        this.addBuyOrder(_price, _remainingSize);
     }
 }
