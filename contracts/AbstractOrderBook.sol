@@ -20,6 +20,30 @@ abstract contract AbstractOrderBook is IAbstractOrderBook {
         uint128 executableSize; // market orders that have been executed and can be claimed by limit order owners
     }
 
+    event OrderCreated(
+        uint256 orderId,
+        address owner,
+        uint96 price,
+        uint128 size,
+        uint128 acceptableRange,
+        bool isBuy
+    );
+
+    event OrderUpdated(
+        uint256 orderId,
+        address owner,
+        uint96 price,
+        uint128 size,
+        uint128 acceptableRange,
+        bool isBuy
+    );
+
+    event OrderCompletedOrCanceled(
+        uint256 orderId,
+        address owner,
+        bool isBuy
+    );
+
     mapping(uint256 => Order) public s_orders;
     mapping(uint256 => PricePoint) public s_buyPricePoints;
     mapping(uint256 => PricePoint) public s_sellPricePoints;
@@ -61,9 +85,11 @@ abstract contract AbstractOrderBook is IAbstractOrderBook {
 
         PricePoint storage _pricePoint = s_buyPricePoints[_price];
 
-        _addOrder(_pricePoint, _price, size, _orderId + 1, true);
+        uint128 _acceptableRange = _addOrder(_pricePoint, _price, size, _orderId + 1, true);
 
         tokenB.transferFrom(msg.sender, address(this), ((((size * _price) * 10**tokenBDecimals) / pricePrecision) / sizePrecision));
+
+        emit OrderCreated(_orderId, msg.sender, _price, size, _acceptableRange, true);
     }
 
     /**
@@ -77,9 +103,11 @@ abstract contract AbstractOrderBook is IAbstractOrderBook {
 
         PricePoint storage _pricePoint = s_sellPricePoints[_price];
 
-        _addOrder(_pricePoint, _price, size, _orderId + 1, false);
+        uint128 _acceptableRange = _addOrder(_pricePoint, _price, size, _orderId + 1, false);
 
         tokenA.transferFrom(msg.sender, address(this), ((size * 10**tokenADecimals) / sizePrecision));
+
+        emit OrderCreated(_orderId, msg.sender, _price, size, _acceptableRange, false);
     }
 
     /**
@@ -88,11 +116,13 @@ abstract contract AbstractOrderBook is IAbstractOrderBook {
      * @param _price Price of the order.
      * @param _size Size of the order.
      */
-    function _addOrder(PricePoint storage _pricePoint, uint96 _price, uint128 _size, uint256 _orderId, bool _isBuy) internal {
+    function _addOrder(PricePoint storage _pricePoint, uint96 _price, uint128 _size, uint256 _orderId, bool _isBuy) internal returns(uint128) {
         uint128 acceptableRange = _pricePoint.totalOrdersAtPrice;
         s_orders[_orderId] = Order(msg.sender, _price, _size, acceptableRange, _isBuy);
 
         _pricePoint.totalOrdersAtPrice += _size;
+
+        return acceptableRange;
     }
 
     /**
@@ -110,6 +140,8 @@ abstract contract AbstractOrderBook is IAbstractOrderBook {
         delete s_orders[_orderId];
 
         tokenA.transfer(_order.ownerAddress, (_order.size * 10**tokenADecimals) / sizePrecision);
+
+        emit OrderCompletedOrCanceled(_orderId, _order.ownerAddress, false);
     }
 
     /**
@@ -127,6 +159,8 @@ abstract contract AbstractOrderBook is IAbstractOrderBook {
         delete s_orders[_orderId];
 
         tokenB.transfer(_order.ownerAddress, ((((_order.size * _order.price) * 10**tokenBDecimals) / pricePrecision) / sizePrecision));
+
+        emit OrderCompletedOrCanceled(_orderId, _order.ownerAddress, true);
     }
 
     /**
@@ -182,6 +216,8 @@ abstract contract AbstractOrderBook is IAbstractOrderBook {
         for (uint256 i = 0; i < _orderIds.length; i++) {
             Order storage order = s_orders[_orderIds[i]];
 
+            require(msg.sender == order.ownerAddress, "OrderBook: Only order owner can update order");
+
             PricePoint storage newPricePoint = order.isBuy ? s_buyPricePoints[_price[i]] : s_sellPricePoints[_price[i]];
             PricePoint storage oldPricePoint = order.isBuy ? s_buyPricePoints[order.price] : s_sellPricePoints[order.price];
 
@@ -194,6 +230,8 @@ abstract contract AbstractOrderBook is IAbstractOrderBook {
 
             // update new price point
             newPricePoint.totalOrdersAtPrice += order.size;
+
+            emit OrderUpdated(_orderIds[i], msg.sender, _price[i], order.size, order.acceptableRange, order.isBuy);
         }
     }
 }
