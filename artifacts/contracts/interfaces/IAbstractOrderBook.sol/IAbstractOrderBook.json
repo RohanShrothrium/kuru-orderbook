@@ -42,25 +42,17 @@
     {
       "inputs": [
         {
-          "internalType": "uint256",
-          "name": "_orderId",
-          "type": "uint256"
-        }
-      ],
-      "name": "cancelBuyOrder",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
+          "internalType": "uint256[]",
+          "name": "_orderIds",
+          "type": "uint256[]"
+        },
         {
-          "internalType": "uint256",
-          "name": "_orderId",
-          "type": "uint256"
+          "internalType": "bool[]",
+          "name": "_isBuy",
+          "type": "bool[]"
         }
       ],
-      "name": "cancelSellOrder",
+      "name": "batchCancelOrders",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"

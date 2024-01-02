@@ -17,6 +17,7 @@ abstract contract AbstractOrderBook is IAbstractOrderBook {
     struct PricePoint {
         uint128 totalCompletedOrCanceledOrders;
         uint128 totalOrdersAtPrice; // sum of size of all orders placed at the price point
+        uint128 executableSize; // market orders that have been executed and can be claimed by limit order owners
     }
 
     event OrderCreated(

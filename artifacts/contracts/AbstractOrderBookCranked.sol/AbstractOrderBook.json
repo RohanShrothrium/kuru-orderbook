@@ -1,7 +1,7 @@
 {
   "_format": "hh-sol-artifact-1",
   "contractName": "AbstractOrderBook",
-  "sourceName": "contracts/AbstractOrderBook.sol",
+  "sourceName": "contracts/AbstractOrderBookCranked.sol",
   "abi": [
     {
       "anonymous": false,
@@ -229,6 +229,11 @@
           "internalType": "uint128",
           "name": "totalOrdersAtPrice",
           "type": "uint128"
+        },
+        {
+          "internalType": "uint128",
+          "name": "executableSize",
+          "type": "uint128"
         }
       ],
       "stateMutability": "view",
@@ -304,6 +309,11 @@
         {
           "internalType": "uint128",
           "name": "totalOrdersAtPrice",
+          "type": "uint128"
+        },
+        {
+          "internalType": "uint128",
+          "name": "executableSize",
           "type": "uint128"
         }
       ],

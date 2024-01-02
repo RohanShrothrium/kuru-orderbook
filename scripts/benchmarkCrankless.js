@@ -46,8 +46,9 @@ async function main() {
     console.log("=============================================")
     const cancelLimitGas = {};
     for (let i = 0; i < 10; i++) {
-        var tx = await orderBook.cancelBuyOrder(
-            i+1
+        var tx = await orderBook.batchCancelOrders(
+            [i+1],
+            [true]
         );
         const receipt = await tx.wait();
 
