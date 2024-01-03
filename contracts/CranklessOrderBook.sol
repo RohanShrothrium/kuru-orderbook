@@ -39,10 +39,13 @@ contract CranklessOrderBook is AbstractOrderBook, ICranklessOrderBook {
         PricePoint memory m_pricePoint = s_buyPricePoints[_order.price];
 
         uint256 _executedSize = 0;
+        uint256[] memory _filledOrders = new uint256[](c_order_ids.length);
 
         while (_size > _order.size && _orderIndex < c_order_ids.length) {
             require(!_order.isBuy, "OrderBook: executing against a buy order");
             require(_order.acceptableRange <= m_pricePoint.totalCompletedOrCanceledOrders, "OrderBook: order not executable");
+
+            _filledOrders[_orderIndex] = c_order_ids[_orderIndex];
 
             _executedSize += _order.size;
             _size -= _order.size;
@@ -96,6 +99,8 @@ contract CranklessOrderBook is AbstractOrderBook, ICranklessOrderBook {
             ((_executedSize * 10 ** tokenADecimals) / sizePrecision)
         );
 
+        emit OrdersCompletedOrCanceled(_filledOrders);
+
         return _size;
     }
 
@@ -122,10 +127,13 @@ contract CranklessOrderBook is AbstractOrderBook, ICranklessOrderBook {
         PricePoint memory m_pricePoint = s_sellPricePoints[_order.price];
 
         uint256 _priceToGet = 0;
+        uint256[] memory _filledOrders = new uint256[](c_order_ids.length);
 
         while (_size > _order.size && _orderIndex < c_order_ids.length) {
             require(_order.isBuy, "OrderBook: executing against a sell order");
             require(_order.acceptableRange <= m_pricePoint.totalCompletedOrCanceledOrders, "OrderBook: order not executable");
+
+            _filledOrders[_orderIndex] = c_order_ids[_orderIndex];
 
             _priceToGet += _order.size * _order.price;
             _size -= _order.size;
@@ -178,6 +186,8 @@ contract CranklessOrderBook is AbstractOrderBook, ICranklessOrderBook {
             msg.sender,
             (((_priceToGet * 10 ** tokenBDecimals) / pricePrecision) / sizePrecision)
         );
+
+        emit OrdersCompletedOrCanceled(_filledOrders);
 
         return _size;
     }

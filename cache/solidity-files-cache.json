@@ -362,8 +362,8 @@
       ]
     },
     "/Users/rohanshrothrium/Documents/orderbook/contracts/interfaces/IAbstractOrderBook.sol": {
-      "lastModificationDate": 1704180851908,
-      "contentHash": "40e89f5ec222e54190055f2491b10561",
+      "lastModificationDate": 1704198569566,
+      "contentHash": "6bd15237fa7237751681bd7ad198bbf0",
       "sourceName": "contracts/interfaces/IAbstractOrderBook.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -397,8 +397,8 @@
       ]
     },
     "/Users/rohanshrothrium/Documents/orderbook/contracts/CranklessOrderBook.sol": {
-      "lastModificationDate": 1704022927270,
-      "contentHash": "50d276a8b29cfbe50388c7eea66b1703",
+      "lastModificationDate": 1704258702565,
+      "contentHash": "820570ce248d945e2f5bfed6565ae261",
       "sourceName": "contracts/CranklessOrderBook.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -436,8 +436,8 @@
       ]
     },
     "/Users/rohanshrothrium/Documents/orderbook/contracts/interfaces/ICranklessOrderBook.sol": {
-      "lastModificationDate": 1703708484784,
-      "contentHash": "0067af0075a440b7e393f17ca1d62e0e",
+      "lastModificationDate": 1704257873613,
+      "contentHash": "8f0946080ca8da0ddce11bcf067ad93c",
       "sourceName": "contracts/interfaces/ICranklessOrderBook.sol",
       "solcConfig": {
         "version": "0.8.17",

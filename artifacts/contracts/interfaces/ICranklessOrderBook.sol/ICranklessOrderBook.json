@@ -7,6 +7,52 @@
       "inputs": [
         {
           "internalType": "uint96[]",
+          "name": "c_order_ids",
+          "type": "uint96[]"
+        },
+        {
+          "internalType": "uint128",
+          "name": "_size",
+          "type": "uint128"
+        },
+        {
+          "internalType": "uint96",
+          "name": "_price",
+          "type": "uint96"
+        }
+      ],
+      "name": "placeAggressivelimitBuy",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint96[]",
+          "name": "c_order_ids",
+          "type": "uint96[]"
+        },
+        {
+          "internalType": "uint128",
+          "name": "_size",
+          "type": "uint128"
+        },
+        {
+          "internalType": "uint96",
+          "name": "_price",
+          "type": "uint96"
+        }
+      ],
+      "name": "placeAggressivelimitSell",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint96[]",
           "name": "c_prices",
           "type": "uint96[]"
         },
